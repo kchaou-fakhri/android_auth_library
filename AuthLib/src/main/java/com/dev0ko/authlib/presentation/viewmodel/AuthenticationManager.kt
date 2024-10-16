@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthenticationViewModel @Inject constructor(
+class AuthenticationManager @Inject constructor(
     private val authRepositoryImpl: AuthRepositoryImpl,
 ) : ViewModel() {
 
@@ -53,7 +53,7 @@ class AuthenticationViewModel @Inject constructor(
 
                 if (resource is Resource.Success && resource.result != null) {
                     _isAuthenticated.value = true
-                    Log.d("AuthenticationViewModel", "User logged in successfully.")
+                    Log.d("authenticationManager", "User logged in successfully.")
                 }
             }
         }
@@ -90,7 +90,7 @@ class AuthenticationViewModel @Inject constructor(
             authRepositoryImpl.logout().collect { resource ->
                 if (resource is Resource.Success && resource.result != null) {
                     _isAuthenticated.value = false
-                    Log.d("AuthenticationViewModel", "User logged in successfully.")
+                    Log.d("authenticationManager", "User logged in successfully.")
                 }
             }
         }
@@ -104,7 +104,7 @@ class AuthenticationViewModel @Inject constructor(
 
              if (resource is Resource.Success && resource.result != null) {
                  _isAuthenticated.value = true
-                 Log.d("AuthenticationViewModel", "User logged in successfully.")
+                 Log.d("authenticationManager", "User logged in successfully.")
              }
         }
     }

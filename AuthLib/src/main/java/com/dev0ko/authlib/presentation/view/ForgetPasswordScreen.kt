@@ -34,7 +34,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -48,7 +47,7 @@ import com.dev0ko.authlib.R
 import com.dev0ko.authlib.presentation.navigation.Route
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
-import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationManager
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
@@ -59,10 +58,10 @@ import com.dev0ko.authlib.utils.validateEmail
 @Composable
 fun ForgetPasswordScreen(
     navController: NavHostController?,
-    authenticationViewModel: AuthenticationViewModel = hiltViewModel()
+    authenticationManager: AuthenticationManager = hiltViewModel()
 ) {
 
-    val forgetPassword by authenticationViewModel.forgetPassword.collectAsState()
+    val forgetPassword by authenticationManager.forgetPassword.collectAsState()
 
 
     var isEmailError by remember { mutableStateOf("") }
@@ -258,7 +257,7 @@ fun ForgetPasswordScreen(
                 else{
                         if (isEmailError.isEmpty()) {
                             email = email.replace(" ", "")
-                            authenticationViewModel.forgetPassword(email)
+                            authenticationManager.forgetPassword(email)
                         }
                     }
 

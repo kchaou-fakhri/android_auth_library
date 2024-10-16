@@ -52,7 +52,7 @@ import com.dev0ko.authlib.R
 import com.dev0ko.authlib.presentation.navigation.Route
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
-import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationManager
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
@@ -63,7 +63,7 @@ import com.dev0ko.authlib.utils.validateCredentials
 @Composable
 fun RegisterScreen(
     navController: NavHostController?,
-    authenticationViewModel: AuthenticationViewModel = hiltViewModel()
+    authenticationManager: AuthenticationManager = hiltViewModel()
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -80,7 +80,7 @@ fun RegisterScreen(
 
     var loading by remember { mutableStateOf(false) }
     var loginError by remember { mutableStateOf(false) }
-    val loginFlow by authenticationViewModel.loginFLow.collectAsState()
+    val loginFlow by authenticationManager.loginFLow.collectAsState()
 
 
     Column(
@@ -357,7 +357,7 @@ fun RegisterScreen(
                     if (isEmailError.isEmpty() && isPasswordError.isEmpty()) {
                         email = email.replace(" ", "")
                         username = username.replace(" ", "")
-                        authenticationViewModel.signUp(email, password, username)
+                        authenticationManager.signUp(email, password, username)
 
                     }
                 }

@@ -59,7 +59,7 @@ import com.dev0ko.authlib.presentation.signin.GoogleAuthUiClient
 import com.dev0ko.authlib.presentation.view.components.CardWithIcon
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
-import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationManager
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
@@ -72,7 +72,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     navController: NavHostController?,
-    authenticationViewModel: AuthenticationViewModel = hiltViewModel()
+    authenticationManager: AuthenticationManager = hiltViewModel()
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -94,7 +94,7 @@ fun LoginScreen(
             result.data?.let { intent ->
                 coroutineScope.launch {
                     val signInRes = googleAuthUiClient.signInWithIntent(intent)
-                    authenticationViewModel.onSignInResult(signInRes)
+                    authenticationManager.onSignInResult(signInRes)
 
                 }
             }
@@ -108,7 +108,7 @@ fun LoginScreen(
 
     var loading by remember { mutableStateOf(false) }
     var loginError by remember { mutableStateOf(false) }
-    val loginFlow by authenticationViewModel.loginFLow.collectAsState()
+    val loginFlow by authenticationManager.loginFLow.collectAsState()
     val interactionSource = remember { MutableInteractionSource() }
 
 
@@ -369,7 +369,7 @@ fun LoginScreen(
 
                     if (isEmailError.isEmpty() && isPasswordError.isEmpty()) {
                         email = email.replace(" ", "")
-                        authenticationViewModel.login(email, password)
+                        authenticationManager.login(email, password)
                     }
                 }
             )

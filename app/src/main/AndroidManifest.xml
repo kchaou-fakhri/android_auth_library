@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AuthApp"
+        android:name=".AuthenticationApplication"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -25,4 +26,6 @@
         </activity>
     </application>
 
+
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

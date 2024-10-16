@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.dev0ko.authlib.R
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
-import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationManager
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.findActivity
 import java.util.Timer
@@ -26,7 +24,7 @@ import java.util.TimerTask
 @Composable
 fun HomeScreen(
     navController: NavHostController,
-    authenticationViewModel: AuthenticationViewModel = hiltViewModel()
+    authenticationManager: AuthenticationManager = hiltViewModel()
 ) {
 
     val context = LocalContext.current
@@ -48,7 +46,7 @@ fun HomeScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 //        Button(onClick = {
-//            authenticationViewModel.logout().also {
+//            authenticationManager.logout().also {
 //                context.findActivity()?.finish()
 //            }
 //        }) {
